@@ -83,7 +83,7 @@
       <div class="warning-container">
         User with email <%= email %> already exists. Please login instead.
       </div>
-    <% } else if (error) { %>
+    <% } if (typeof error) { %>
       <div class="warning-container">
         Email or password is incorrect, Please try again.
       </div>
