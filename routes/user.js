@@ -10,12 +10,18 @@ router.get('/', (req, res) => {
 });
 router.post("/signup", async(req,res)=>{
     const { name, email, password } = req.body;
-    await User.create({
-      name,
-      email,
-      password,
-    });
-    return res.redirect("/user/login");
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.redirect(`/user/login?userExists=true&email=${encodeURIComponent(email)}`);
+  }
+    else{
+      await User.create({
+        name,
+        email,
+        password,
+      });
+      return res.redirect("/user/login");
+    }
 });
 
 //login
