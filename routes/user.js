@@ -26,7 +26,8 @@ router.post("/signup", async(req,res)=>{
 
 //login
 router.get('/login',(req,res)=>{
-  res.render('login');
+  const{userExists, email} = req.query;
+  res.render('login',{userExists, email});
 })
 router.post("/login",async(req,res)=>{
     const { email, password } = req.body;
